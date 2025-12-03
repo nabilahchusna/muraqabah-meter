@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muraqabah Meter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f5f3;
+            padding: 20px;
+            max-width: 480px;
+            margin: auto;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Muraqabah Meter</h2>
+    <p>Refleksi niat sebelum memposting sesuatu di media sosial.</p>
+
+    <div class="card" id="start-screen">
+        <p>Klik tombol di bawah untuk memulai pemeriksaan niat.</p>
+        <button onclick="startCheck()">Mulai Refleksi</button>
+    </div>
+
+    <div class="card hidden" id="questions">
+        <h3>Pertanyaan Reflektif</h3>
+        <p id="question-text"></p>
+        <button onclick="nextQuestion()">Lanjut</button>
+    </div>
+
+    <div class="card hidden" id="result">
+        <h3>Hasil Refleksi</h3>
+        <p id="result-text"></p>
+        <button onclick="restart()">Ulangi</button>
+    </div>
+
+    <script>
+        const questions = [
+            "Apakah postingan ini untuk mencari perhatian atau validasi publik?",
+            "Apakah isi postingan ini bisa melukai hati orang lain tanpa saya sadari?",
+            "Apakah saya akan tetap memposting ini jika tidak ada yang memberi like?"
+        ];
+
+        let index = 0;
+
+        function startCheck() {
+            document.getElementById("start-screen").classList.add("hidden");
+            document.getElementById("questions").classList.remove("hidden");
+            index = 0;
+            document.getElementById("question-text").textContent = questions[index];
+        }
+
+        function nextQuestion() {
+            index++;
+            if (index < questions.length) {
+                document.getElementById("question-text").textContent = questions[index];
+            } else {
+                document.getElementById("questions").classList.add("hidden");
+                document.getElementById("result").classList.remove("hidden");
+                document.getElementById("result-text").textContent =
+                    "Jika niatmu masih ragu atau condong ke pencitraan, tahan dulu postingannya. Pilih makna daripada sorotan.";
+            }
+        }
+
+        function restart() {
+            document.getElementById("result").classList.add("hidden");
+            document.getElementById("start-screen").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>
